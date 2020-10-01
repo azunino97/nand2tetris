@@ -14,4 +14,9 @@ CHIP HalfAdder {
 
     PARTS:
     // Put you code here:
+    Nand(a=a, b=b, out=n1);
+    Nand(a=a, b=n1, out=n2);
+    Nand(a=b, b=n1, out=n3);
+    Nand(a=n2, b=n3, out=sum);
+    Nand(a=n1, b=n1, out=carry);
 }

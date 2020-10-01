@@ -43,4 +43,47 @@ CHIP ALU {
 
     PARTS:
    // Put you code here:
+   And16(a=x, b[0..15]=false, out=and1);
+   Mux16(a=x, b=and1, sel=zx, out=mux2);
+   Not16(in=mux2, out=nmux2);
+   Mux16(a=mux2, b=nmux2, sel=nx, out=mux3);
+
+   And16(a=y, b[0..15]=false, out=and2);
+   Mux16(a=y, b=and2, sel=zy, out=mux4);
+   Not16(in=mux4, out=nmux4);
+   Mux16(a=mux4, b=nmux4, sel=ny, out=mux5);
+
+   And16(a=mux3, b=mux5, out=and16);
+   Add16(a=mux3, b=mux5, out=add16);
+   Mux16(a=and16, b=add16, sel=f, out=mux1);
+   Not16(in=mux1, out=nmux1);
+   Mux16(a=mux1, b=nmux1, sel=no, out[15]=ng, out=out, out=outp);
+   Not16(in=outp, out[0]=hold0, out[1]=hold1, out[2]=hold2, out[3]=hold3, out[4]=hold4, out[5]=hold5, out[6]=hold6, out[7]=hold7, out[8]=hold8, out[9]=hold9, out[10]=hold10, out[11]=hold11, out[12]=hold12, out[13]=hold13, out[14]=hold14, out[15]=hold15);
+   
+   // And all of the OUT output bits one by one
+   And(a=hold0, b=hold1, out=h0);
+   And(a=h0, b=hold2, out=h1);
+   And(a=h1, b=hold3, out=h2);
+   And(a=h2, b=hold4, out=h3);
+   And(a=h3, b=hold5, out=h4);
+   And(a=h4, b=hold6, out=h5);
+   And(a=h5, b=hold7, out=h6);
+   And(a=h6, b=hold8, out=h7);
+   And(a=h7, b=hold9, out=h8);
+   And(a=h8, b=hold10, out=h9);
+   And(a=h9, b=hold11, out=h10);
+   And(a=h10, b=hold12, out=h11);
+   And(a=h11, b=hold13, out=h12);
+   And(a=h12, b=hold14, out=h13);
+   And(a=h13, b=hold15, out=zr);
+
+   //And16(a=nmux1, b[0..15]=true, out[0]=zr);
+   
+
+
+
+
+
+
+
 }
